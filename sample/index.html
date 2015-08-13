@@ -4,18 +4,21 @@
   var uri = "ws://localhost:4000";
   var ws = new WebSocket(uri);
   ws.onopen = function() {
-    document.getElementById("status").innerHTML = "open";
+    document.getElementById("status").innerHTML = "ready";
   }
   ws.onmessage = function(event) {
-    document.getElementById("status").innerHTML = event.data;
+    console.log("receive");
+    var video = document.querySelector('video');
+    video.src = window.URL.createObjectURL(event.data);
   }
   function sendMessage() {
-    ws.send("test");
+    ws.send("start");
   }
   </script>
 </head>
 <body>
+  <video controls autoplay width="320" height="240"></video>
   <div id="status"></div>
-  <input type="button" onclick="sendMessage()" value="message"></button>
+  <input type="button" onclick="sendMessage()" value="play"></button>
 </body>
 </html>

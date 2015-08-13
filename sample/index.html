@@ -1,0 +1,21 @@
+<html>
+<head>
+  <script>
+  var uri = "ws://localhost:4000";
+  var ws = new WebSocket(uri);
+  ws.onopen = function() {
+    document.getElementById("status").innerHTML = "open";
+  }
+  ws.onmessage = function(event) {
+    document.getElementById("status").innerHTML = event.data;
+  }
+  function sendMessage() {
+    ws.send("test");
+  }
+  </script>
+</head>
+<body>
+  <div id="status"></div>
+  <input type="button" onclick="sendMessage()" value="message"></button>
+</body>
+</html>
